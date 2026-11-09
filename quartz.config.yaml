@@ -6,7 +6,7 @@ configuration:
   enablePopovers: true
   analytics: null
   locale: en-GB
-  baseUrl: jeswingit.github.io/garden
+  baseUrl: garden.jeswin.co
   ignorePatterns:
     - private
     - templates
@@ -110,7 +110,7 @@ plugins:
   - source: "@quartz-community/og-image"
     enabled: true
   - source: "@quartz-community/cname"
-    enabled: false
+    enabled: true
   - source: "@quartz-community/canvas-page"
     enabled: true
   - source: "@quartz-community/content-page"
@@ -193,6 +193,7 @@ plugins:
     options:
       links:
         Source: https://github.com/jeswingit/garden
+        Edit: /admin/
     layout:
       position: footer
       priority: 50

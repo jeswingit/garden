@@ -26,6 +26,8 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npx quartz build
+      - name: Add editor (/admin)
+        run: cp -r admin public/admin
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

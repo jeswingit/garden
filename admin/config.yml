@@ -1,0 +1,46 @@
+backend:
+  name: github
+  repo: jeswingit/garden
+  branch: main
+
+media_folder: content/attachments
+public_folder: /attachments
+
+site_url: https://garden.jeswin.co
+display_url: https://garden.jeswin.co
+
+collections:
+  - name: notes
+    label: Notes
+    label_singular: Note
+    folder: content/notes
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{status}})"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Status
+        name: status
+        widget: select
+        options: [seedling, budding, evergreen]
+        default: seedling
+      - { label: Tags, name: tags, widget: list, required: false }
+      # Plain text on purpose: keeps [[wiki links]] exactly as typed.
+      - { label: Note, name: body, widget: text }
+
+  - name: pages
+    label: Home page
+    files:
+      - label: Home
+        name: home
+        file: content/index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: Status
+            name: status
+            widget: select
+            options: [seedling, budding, evergreen]
+            default: evergreen
+          - { label: Body, name: body, widget: text }

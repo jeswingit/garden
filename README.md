@@ -17,9 +17,24 @@ A digital garden built with [Quartz](https://quartz.jzhao.xyz). Notes are Markdo
 
 For a custom domain such as `garden.jeswin.co`, set it in Settings → Pages, then change `baseUrl` to `garden.jeswin.co`.
 
-## Writing notes in the browser
+## Custom domain (garden.jeswin.co)
 
-Open your repo on GitHub and press `.` (or visit github.dev/jeswingit/garden). That opens a full editor in the browser with Markdown preview. Add a file under `content/notes/`, commit, and the site rebuilds.
+1. In Cloudflare DNS for jeswin.co add a **CNAME**: name `garden`, target `jeswingit.github.io`, proxy status **DNS only**.
+2. In the repo go to **Settings -> Pages -> Custom domain**, enter `garden.jeswin.co`, save, and tick **Enforce HTTPS** once the certificate is ready.
+
+`baseUrl` in `quartz.config.yaml` is already `garden.jeswin.co`.
+
+## Editing from the website
+
+Go to `https://garden.jeswin.co/admin/` and choose **Sign in with Token**.
+
+1. Create a token at GitHub -> Settings -> Developer settings -> Personal access tokens -> **Fine-grained tokens**.
+2. Repository access: **only** `jeswingit/garden`. Permissions: **Contents -> Read and write**.
+3. Paste the token in the editor. It is stored in that browser only, so repeat on each device.
+
+Saving a note commits to `main`, and the site rebuilds in about a minute. The editor is in `admin/` (copied into the site by the workflow); change fields or collections in `admin/config.yml`.
+
+Alternative with no setup: open the repo and press `.` for GitHub's own editor.
 
 Start new notes from `content/templates/new-note.md`:
 
