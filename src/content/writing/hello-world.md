@@ -1,5 +1,5 @@
 ---
-title: Hello, world
+title: "Hello, world"
 date: 2026-11-09
 description: A placeholder post. Replace or delete it.
 draft: false
