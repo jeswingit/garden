@@ -1,14 +1,23 @@
 {
   "siteName": "garden",
   "description": "Notes, writing and projects.",
-  "name": "Your Name",
-  "tagline": "Role / Interest / Interest",
+  "name": "Jeswin Jose",
+  "tagline": "Data Analyst / Noob Writer / Humanz",
   "bio": "One or two sentences about who you are and what you work on. Replace this placeholder with your own words.",
   "photo": "",
   "links": [
-    { "label": "Email", "url": "mailto:you@example.com" },
-    { "label": "GitHub", "url": "https://github.com/jeswingit" },
-    { "label": "LinkedIn", "url": "https://linkedin.com/in/your-handle" }
+    {
+      "label": "Email",
+      "url": "mailto:you@example.com"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/jeswingit"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/your-handle"
+    }
   ],
   "footerQuote": "A short quote you like goes here.",
   "footerQuoteAuthor": "Author"
