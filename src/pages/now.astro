@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from "astro:content"
+import Base from "../layouts/Base.astro"
+import { fullDate } from "../lib/format"
+
+const entry = (await getEntry("pages", "now"))!
+const { Content } = await render(entry)
+---
+
+<Base title={entry.data.title}>
+  <div class="page-head">
+    <h1>{entry.data.title}</h1>
+    {entry.data.updated && <p class="meta">Last updated {fullDate(entry.data.updated)}</p>}
+  </div>
+  <div class="prose"><Content /></div>
+</Base>

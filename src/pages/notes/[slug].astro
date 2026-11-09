@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content"
+import Base from "../../layouts/Base.astro"
+import { extractLinks } from "../../lib/wikilinks.mjs"
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes")
+  return notes.map((note) => {
+    const backlinks = notes
+      .filter((other) => other.id !== note.id && extractLinks(other.body ?? "").includes(note.id))
+      .sort((a, b) => a.data.title.localeCompare(b.data.title))
+    return { params: { slug: note.id }, props: { note, backlinks } }
+  })
+}
+
+const { note, backlinks } = Astro.props
+const { Content } = await render(note)
+---
+
+<Base title={note.data.title}>
+  <article>
+    <div class="page-head">
+      <p class="meta"><a href="/notes/">← notes</a></p>
+      <h1>{note.data.title}</h1>
+      <p class="meta">
+        <span class={`badge ${note.data.status}`}>{note.data.status}</span>
+        {note.data.tags.length > 0 && <span class="tags">{note.data.tags.map((t) => <span>#{t}</span>)}</span>}
+      </p>
+    </div>
+    <div class="prose"><Content /></div>
+  </article>
+  {
+    backlinks.length > 0 && (
+      <aside class="backlinks">
+        <h2>Linked from</h2>
+        <ul class="plain-list">
+          {backlinks.map((b) => <li><a class="wikilink" href={`/notes/${b.id}/`}>{b.data.title}</a></li>)}
+        </ul>
+      </aside>
+    )
+  }
+</Base>

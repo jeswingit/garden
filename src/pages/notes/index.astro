@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content"
+import Base from "../../layouts/Base.astro"
+
+const notes = (await getCollection("notes")).sort((a, b) => a.data.title.localeCompare(b.data.title))
+const groups = [
+  { status: "evergreen", blurb: "Well developed and maintained" },
+  { status: "budding", blurb: "Taking shape, still being reworked" },
+  { status: "seedling", blurb: "Rough first thoughts" },
+] as const
+---
+
+<Base title="Notes" description="A digital garden of interconnected notes.">
+  <div class="page-head">
+    <h1>Notes</h1>
+    <p class="meta">A digital garden: notes in different stages of growth, linked together.</p>
+  </div>
+  {
+    groups.map((g) => {
+      const items = notes.filter((n) => n.data.status === g.status)
+      return (
+        items.length > 0 && (
+          <section>
+            <h2>
+              <span class={`badge ${g.status}`}>{g.status}</span> <span class="dim">{g.blurb}</span>
+            </h2>
+            <ul class="plain-list note-list">
+              {items.map((n) => (
+                <li>
+                  <a href={`/notes/${n.id}/`}>{n.data.title}</a>
+                  {n.data.tags.length > 0 && <span class="tags dim">{n.data.tags.map((t) => <span>#{t}</span>)}</span>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      )
+    })
+  }
+</Base>

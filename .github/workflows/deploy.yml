@@ -1,4 +1,4 @@
-name: Deploy garden to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   push:
@@ -19,18 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - run: npm ci
-      - run: npx quartz build
-      - name: Add editor (/admin)
-        run: cp -r admin public/admin
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: dist
 
   deploy:
     needs: build

@@ -1,0 +1,103 @@
+backend:
+  name: github
+  repo: jeswingit/garden
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+site_url: https://garden.jeswin.co
+display_url: https://garden.jeswin.co
+
+collections:
+  - name: notes
+    label: Notes
+    label_singular: Note
+    folder: src/content/notes
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{status}})"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Status
+        name: status
+        widget: select
+        options: [seedling, budding, evergreen]
+        default: seedling
+      - { label: Tags, name: tags, widget: list, required: false }
+      # Plain text on purpose: keeps [[wiki links]] exactly as typed.
+      - { label: Note, name: body, widget: text }
+
+  - name: writing
+    label: Writing
+    label_singular: Post
+    folder: src/content/writing
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    sort_by: date
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: string }
+      - { label: Website, name: url, widget: string, required: false }
+      - { label: Source repo, name: repo, widget: string, required: false }
+      - { label: Status, name: status, widget: string, required: false }
+      - { label: Order (lower shows first), name: order, widget: number, value_type: int, default: 100 }
+      - { label: Body, name: body, widget: markdown, required: false }
+
+  - name: pages
+    label: Pages (Now / About)
+    files:
+      - label: Now
+        name: now
+        file: src/content/pages/now.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Last updated, name: updated, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false }
+          - { label: Body, name: body, widget: markdown }
+      - label: About
+        name: about
+        file: src/content/pages/about.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown }
+
+  - name: settings
+    label: Home & site settings
+    files:
+      - label: Site, hero and links
+        name: site
+        file: src/data/site.json
+        fields:
+          - { label: Site name (header), name: siteName, widget: string }
+          - { label: Site description, name: description, widget: string }
+          - { label: Your name, name: name, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Bio, name: bio, widget: text }
+          - { label: Photo (path or upload), name: photo, widget: image, required: false }
+          - label: Links
+            name: links
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string }
+          - { label: Footer quote, name: footerQuote, widget: string, required: false }
+          - { label: Quote author, name: footerQuoteAuthor, widget: string, required: false }

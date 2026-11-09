@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content"
+import Base from "../../layouts/Base.astro"
+import PostList from "../../components/PostList.astro"
+
+const posts = (await getCollection("writing", (p) => !p.data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+)
+---
+
+<Base title="Writing" description="Essays and posts.">
+  <div class="page-head">
+    <h1>Writing</h1>
+    <p class="meta">Longer, finished pieces. For work in progress, see the <a href="/notes/">notes</a>.</p>
+  </div>
+  {posts.length ? <PostList posts={posts} /> : <p class="dim">Nothing published yet.</p>}
+</Base>

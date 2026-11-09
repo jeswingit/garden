@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from "astro:content"
+import Base from "../layouts/Base.astro"
+
+const entries = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title),
+)
+const projects = await Promise.all(entries.map(async (e) => ({ e, Content: (await render(e)).Content })))
+---
+
+<Base title="Projects" description="Things I've built.">
+  <div class="page-head">
+    <h1>Projects</h1>
+    <p class="meta">Things I've built.</p>
+  </div>
+  {
+    projects.map(({ e, Content }) => (
+      <div class="project">
+        <h3>{e.data.title}</h3>
+        <p>{e.data.description}{e.data.status && <> · {e.data.status}</>}</p>
+        <div class="prose"><Content /></div>
+        <div class="links">
+          {e.data.url && <a href={e.data.url}>Visit →</a>}
+          {e.data.repo && <a href={e.data.repo}>Source →</a>}
+        </div>
+      </div>
+    ))
+  }
+  {projects.length === 0 && <p class="dim">Nothing here yet.</p>}
+</Base>
