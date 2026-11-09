@@ -8,7 +8,7 @@ const { Content } = await render(entry)
 ---
 
 <Base title={entry.data.title}>
-  <div class="page-head">
+  <div class="page-head" data-edit-type="pages" data-edit-path="src/content/pages/about.md">
     <h1>{entry.data.title}</h1>
     {entry.data.updated && <p class="meta">Last updated {fullDate(entry.data.updated)}</p>}
   </div>

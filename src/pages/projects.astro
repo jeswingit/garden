@@ -9,13 +9,13 @@ const projects = await Promise.all(entries.map(async (e) => ({ e, Content: (awai
 ---
 
 <Base title="Projects" description="Things I've built.">
-  <div class="page-head">
+  <div class="page-head" data-new-type="projects">
     <h1>Projects</h1>
     <p class="meta">Things I've built.</p>
   </div>
   {
     projects.map(({ e, Content }) => (
-      <div class="project">
+      <div class="project" data-edit-type="projects" data-edit-path={e.filePath ?? `src/content/projects/${e.id}.md`}>
         <h3>{e.data.title}</h3>
         <p>{e.data.description}{e.data.status && <> · {e.data.status}</>}</p>
         <div class="prose"><Content /></div>

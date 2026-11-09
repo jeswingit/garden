@@ -9,7 +9,7 @@ const posts = (await getCollection("writing", (p) => !p.data.draft)).sort(
 ---
 
 <Base title="Writing" description="Essays and posts.">
-  <div class="page-head">
+  <div class="page-head" data-new-type="writing">
     <h1>Writing</h1>
     <p class="meta">Longer, finished pieces. For work in progress, see the <a href="/notes/">notes</a>.</p>
   </div>

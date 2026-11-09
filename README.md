@@ -20,6 +20,10 @@ Link notes with `[[note-file-name]]` or `[[note-file-name|label]]`. Backlinks ap
 
 Go to https://garden.jeswin.co/admin/ and **Sign in with Token** (a GitHub fine-grained token limited to this repo, with Contents: Read and write). Saving commits to `main` and the site rebuilds in about a minute. Collections and fields are defined in `public/admin/config.yml`.
 
+## Edit on the page itself
+
+Once set up (see [SETUP-EDITING.md](SETUP-EDITING.md)), sign in with Google from the site header and use the **edit** and **+ new** buttons on any page. `/admin` stays as a fallback.
+
 ## Run locally
 
 ```

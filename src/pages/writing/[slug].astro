@@ -14,7 +14,7 @@ const { Content } = await render(post)
 
 <Base title={post.data.title} description={post.data.description}>
   <article>
-    <div class="page-head">
+    <div class="page-head" data-edit-type="writing" data-edit-path={post.filePath ?? `src/content/writing/${post.id}.md`}>
       <p class="meta"><a href="/writing/">← writing</a></p>
       <h1>{post.data.title}</h1>
       <p class="meta"><time datetime={post.data.date.toISOString()}>{fullDate(post.data.date)}</time></p>

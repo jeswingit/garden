@@ -19,7 +19,7 @@ const { Content } = await render(note)
 
 <Base title={note.data.title}>
   <article>
-    <div class="page-head">
+    <div class="page-head" data-edit-type="notes" data-edit-path={note.filePath ?? `src/content/notes/${note.id}.md`}>
       <p class="meta"><a href="/notes/">← notes</a></p>
       <h1>{note.data.title}</h1>
       <p class="meta">

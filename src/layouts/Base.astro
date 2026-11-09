@@ -46,6 +46,7 @@ const path = Astro.url.pathname
         <a class="brand" href="/"><span class="brand-mark">~/</span>{site.siteName}</a>
         <nav aria-label="Main">
           {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}>{n.label}</a>)}
+          <span id="auth-slot"></span>
           <button id="theme-toggle" type="button" aria-label="Toggle light and dark theme">◐</button>
         </nav>
       </div>
@@ -72,6 +73,9 @@ const path = Astro.url.pathname
       </div>
     </footer>
 
+    <script>
+      import "../scripts/editor.js"
+    </script>
     <script is:inline>
       document.getElementById("theme-toggle").addEventListener("click", function () {
         var next = document.documentElement.dataset.theme === "light" ? "dark" : "light"
